@@ -1,35 +1,59 @@
-import { StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, ActivityIndicator, Image, StyleSheet } from 'react-native';
+import useFetchData from '../hooks/useFetchData';
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
+const MyComponent = () => {
+  const { textContent, imageContent, isLoading } = useFetchData();
 
-export default function TabOneScreen() {
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  // Render alternating text and image content
+  const content = [];
+  for (let i = 0; i < Math.max(textContent.length, imageContent.length); i++) {
+    if (textContent[i]) {
+      content.push(<Text style={styles.text} key={`text-${i}`}>{textContent[i]}</Text>);
+    }
+    if (imageContent[i] && imageContent[i].length > 0) {
+      content.push(
+        <View style={styles.imageContainer} key={`image-${i}`}>
+          <Image source={{ uri: imageContent[i][0] }} style={styles.image} />
+        </View>
+      );
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      {content}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  imageContainer: {
+    marginBottom: 20,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'cover',
+  },
+  text: {
+    fontSize: 16,
+    textAlign: 'center',
+    paddingHorizontal: 20,
   },
 });
+
+export default MyComponent;

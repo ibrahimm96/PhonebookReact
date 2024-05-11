@@ -1,5 +1,5 @@
 // Learn more about createBottomTabNavigator:
-// https://reactnavigation.org/docs/bottom-tab-navigator
+// https://reactnavigation.org/docs/bottom-tab-navigator'
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -25,7 +25,7 @@ export default function BottomTabNavigator() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="construct-outline" color={color} />
           ),
         }}
       />
@@ -35,7 +35,7 @@ export default function BottomTabNavigator() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="color-wand-outline" color={color} />
           ),
         }}
       />
