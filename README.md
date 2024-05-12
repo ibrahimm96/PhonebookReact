@@ -6,6 +6,9 @@ The app is preset to render my Phonebook account---'savine63', but you can chang
 
 This project is setup to use the Expo CLI. Expo is a platform for building universal React applications. It streamlines React Native development by providing pre-configured tools, and provides a nice client app for testing. 
 
+# Known Issues
+- Issues fetching all user posts. Problem lies within the useGetData() logic, where the call only fetches most recent posts.
+  
 # Setting Up React Native Project with Expo CLI
 
 This guide provides step-by-step instructions for setting up a React Native project using Expo CLI, including installing Node.js, Expo CLI, and cloning a project from Git.
