@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ibrahimm96.expotemplatetabs"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,6 +34,11 @@
     "plugins": [
       "expo-font",
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8df0f9f9-269d-41c8-9ad9-78881bf61b42"
+      }
+    }
   }
 }
