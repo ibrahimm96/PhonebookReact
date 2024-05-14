@@ -7,7 +7,9 @@ The app is preset to render my Phonebook account---'savine63', but you can chang
 This project is setup to use the Expo CLI. Expo is a platform for building universal React applications. It streamlines React Native development by providing pre-configured tools, and provides a nice client app for testing. 
 
 # Known Issues
-- Issues fetching all user posts. Problem lies within the useGetData() logic, where the call only fetches most recent posts.
+- Timezone error---displays incorrect timezone.
+- Posts with both image & text are formatted as two seperate posts. 
+- Unable to reload data while using app.
   
 # Setting Up React Native Project with Expo CLI
 
