@@ -2,8 +2,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import ConnectScreen from "../screens/ConnectScreen";
+import DiscoverScreen from "../screens/DiscoverScreen";
+import HelpScreen from "../screens/HelpScreen";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -11,22 +12,32 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="TabOne">
       <BottomTab.Screen
-        name="TabOne"
+        name="Connect"
         component={TabOneNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="construct-outline" color={color} />
+            <TabBarIcon name="person" color={color} />
           ),
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Discover"
         component={TabTwoNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="color-wand-outline" color={color} />
+            <TabBarIcon name="search" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Help"
+        component={TabThreeNavigator}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="help" color={color} />
           ),
         }}
       />
@@ -45,7 +56,7 @@ function TabOneNavigator() {
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name="TabOneScreen"
-        component={TabOneScreen}
+        component={ConnectScreen}
         options={{ headerTitle: "Savine63's Phonebook" }}
       />
     </TabOneStack.Navigator>
@@ -59,9 +70,23 @@ function TabTwoNavigator() {
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: "User Preferences" }}
+        component={DiscoverScreen}
+        options={{ headerTitle: "Discover" }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const TabThreeStack = createStackNavigator();
+
+function TabThreeNavigator() {
+  return (
+    <TabThreeStack.Navigator>
+      <TabThreeStack.Screen
+        name="TabThreeScreen"
+        component={HelpScreen}
+        options={{ headerTitle: "Help" }}
+      />
+    </TabThreeStack.Navigator>
   );
 }
