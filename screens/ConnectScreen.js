@@ -1,10 +1,33 @@
 import React from "react";
-import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView, TextInput, Button} from "react-native";
+import { useState } from "react";
 import useFetchData from "../hooks/useFetchData";
 
 const ConnectScreen = () => {
   const { textContent, imageContent, isLoading } = useFetchData();
+  const [username, setUsername] = useState('');
+  const [showContent, setShowContent] = useState(false);
 
+
+  const handleUsernameSubmit = () => {
+    console.log("Username:", username);
+    setShowContent(true);
+  };
+
+  if (!showContent) {
+    return (
+      <View style={styles.container}>
+        <Text>Please enter your username:</Text>
+        <TextInput
+          style={styles.input}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Username"
+        />
+        <Button title="Submit" onPress={handleUsernameSubmit} />
+      </View>
+    );
+  }
   if (isLoading) {
     return (
       <View style={styles.container}>
