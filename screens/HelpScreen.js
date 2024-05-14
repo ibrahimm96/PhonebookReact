@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Help = () => {
+const HelpScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Help Screen:</Text>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Help;
+export default HelpScreen;

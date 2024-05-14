@@ -11,7 +11,7 @@ import useFetchData from '../hooks/useFetchData';
 //  - User Login (links username to proper data retrieval)
 //  - Better UI design
 //  
-const TabTwoScreen = () => {
+const DiscoverScreen = () => {
   const { userPreferences, isLoading } = useFetchData();
   
   if (isLoading) {
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default TabTwoScreen;
+export default DiscoverScreen;

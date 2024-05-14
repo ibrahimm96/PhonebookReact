@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView } from "react-native";
 import useFetchData from "../hooks/useFetchData";
 
-const TabOneScreen = () => {
+const ConnectScreen = () => {
   const { textContent, imageContent, isLoading } = useFetchData();
 
   if (isLoading) {
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TabOneScreen;
+export default ConnectScreen;
