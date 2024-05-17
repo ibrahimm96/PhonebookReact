@@ -9,7 +9,6 @@ const HelpScreen = () => {
         <Text>- This menu provides instructions and resources for using the Phonebook solution.</Text>
         <Text>- It includes a list of available "/" commands and their descriptions.</Text>
         <Text>- Information on how to get additional assistance if needed is also provided.</Text>
-        {/* Add additional sections as needed */}
       </View>
     </View>
   );
@@ -18,12 +17,12 @@ const HelpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', // Center vertically
-    alignItems: 'center', // Center horizontally
+    justifyContent: 'center', 
+    alignItems: 'center',
     padding: 20,
   },
   content: {
-    maxWidth: 300, // Limit width for better readability
+    maxWidth: 300,
   },
   title: {
     fontSize: 24,

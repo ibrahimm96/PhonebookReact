@@ -2,15 +2,6 @@ import React from 'react';
 import { View, Text, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import useFetchData from '../hooks/useFetchData';
 
-// Barebones display of data from user_pref
-// Needs better UI design
-
-//What to work on:
-//  - If one post has image & text, it is not formatted as one post
-//  - No reload feature
-//  - User Login (links username to proper data retrieval)
-//  - Better UI design
-//  
 const DiscoverScreen = () => {
   const { userPreferences, isLoading } = useFetchData();
   
