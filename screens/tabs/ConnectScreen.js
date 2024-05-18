@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView, TextInput, Button, Alert, RefreshControl} from "react-native";
 import { useState, useCallback } from "react";
-import DisplayLogin from "../components/userVerification/DisplayLogin";
-import DisplayUserPhonebook from "../components/DisplayUserPhonebook"
+import LoginScreen from "../authentication/LoginScreen"
 
 const ConnectScreen = () => {
-  const [showContent, setShowContent] = useState(false);
+
   
   const handleUsernameSubmit = () => {
     console.log("Username submitted from ConnectScreen");
@@ -13,7 +12,7 @@ const ConnectScreen = () => {
 
   return (
     <View style={styles.container}>
-      <DisplayLogin onUsernameSubmit={handleUsernameSubmit} /> 
+      <LoginScreen />
     </View>
   );
 };

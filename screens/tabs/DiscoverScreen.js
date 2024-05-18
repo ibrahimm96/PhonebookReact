@@ -1,18 +1,8 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
-import useFetchData from '../hooks/useFetchData';
+
 
 const DiscoverScreen = () => {
-  const { userPreferences, isLoading } = useFetchData();
-  
-  if (isLoading) {
-    return (
-      <View>
-        <ActivityIndicator/>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}>

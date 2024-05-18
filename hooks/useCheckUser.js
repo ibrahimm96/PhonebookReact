@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 const useCheckUser = (rawPhoneNumber) => {
   const [userExists, setUserExists] = useState(false)
+  const [loading, setLoading] = useState(false)
   const phonebookNumber = '+15103301270';
 
   const apiURL = "https://api.phonebook.lol/get-site-from-number";
@@ -14,6 +15,7 @@ const useCheckUser = (rawPhoneNumber) => {
     const formattedPhoneNumber = `+1${rawPhoneNumber}`;
 
     const checkUser = async () => {
+      setLoading(true)
       try {
         const response = await fetch(apiURL, {
           method: 'POST',
@@ -42,13 +44,15 @@ const useCheckUser = (rawPhoneNumber) => {
       } catch (error) {
         console.error('Error:', error);
         setUserExists(false);
+      } finally {
+        setLoading(false)
       }
     };
 
     checkUser();
   }, [rawPhoneNumber]);
 
-  return userExists;
+  return { userExists, loading };
 };
 
 export default useCheckUser;

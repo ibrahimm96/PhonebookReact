@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from "react-native";
+import { useEffect } from "react";
 import useCheckUser from "../../hooks/useCheckUser";
 
-const DisplayLogin = ({ showContent }) => {
+const DisplayLogin = ({ onUserExists}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const userExists = useCheckUser(phoneNumber);
+  const [enteredNumber, setEnteredNumber] = useState('');  
+  const { userExists, loading } = useCheckUser(phoneNumber);
 
   const handlePhoneNumberChange = (input) => {
-    const cleanedInput = input.replace(/\D/g, ''); 
-    if (cleanedInput.length <= 10) {
-      setPhoneNumber(cleanedInput);
-    } else {
-      console.log('Invalid phone number', 'Phone number must be exactly 10 digits.');
+    setEnteredNumber(input)
+    console.log('User Entered: ', enteredNumber);
+  }
+
+  useEffect(() => {
+    if (userExists) {
+      onUserExists(true); 
     }
-  };
+  }, [userExists, onUserExists]);
+
 
   return (
     <View style={styles.container}>
@@ -21,16 +26,18 @@ const DisplayLogin = ({ showContent }) => {
         <Text style={styles.prefix}>+1</Text>
         <TextInput
           style={styles.input}
-          value={phoneNumber}
-          onChangeText={handlePhoneNumberChange}
+          value={enteredNumber}
           placeholder="Enter 10-digit Phone Number"
           keyboardType="numeric"
-          maxLength={10} // Limit the input to 10 characters
+          onChangeText={handlePhoneNumberChange}
+          maxLength={10} 
         />
+        {loading && <ActivityIndicator size="small" color="#0000ff" />}
       </View>
-      {userExists === null && <Text>Checking user existence...</Text>}
-      {userExists === true && <Text>User exists!</Text>}
-      {userExists === false && <Text>User does not exist!</Text>}
+      <Button
+        title="Load my Site"
+        onPress={()=>setPhoneNumber(enteredNumber)}
+      />
     </View>
   );
 };
