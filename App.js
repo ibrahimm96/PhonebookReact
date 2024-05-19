@@ -7,29 +7,48 @@ import DisplayUserPhonebook from './components/DisplayUserPhonebook';
 import ConnectScreen from './screens/tabs/ConnectScreen';
 import DiscoverScreen from './screens/tabs/DiscoverScreen';
 import HelpScreen from './screens/tabs/HelpScreen';
+import useSendOTP from './hooks/useSendOTP';
+import { useState } from 'react';
+import DisplayLogin from './components/userVerification/DisplayLogin';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const ConnectStack = () => (
+const ConnectStack = ({ signedIn, onSignedIn }) => (
   <Stack.Navigator>
-    <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="DisplayUserPhonebook" component={DisplayUserPhonebook} />
+    {signedIn ? (
+      <>
+        <Stack.Screen name="ConnectMain" component={ConnectScreen} />
+        <Stack.Screen name="DisplayUserPhonebook" component={DisplayUserPhonebook} />
+      </>
+    ) : (
+      <Stack.Screen name="Login" options={{ headerShown: false }}>
+        {({ navigation }) => <LoginScreen onSignedIn={onSignedIn} />}
+      </Stack.Screen>
+    )}
   </Stack.Navigator>
 );
 
-const MainTabNavigator = () => (
+const MainTabNavigator = ({ signedIn, onSignedIn }) => (
   <Tab.Navigator>
-    <Tab.Screen name="Connect" component={ConnectStack} />
+    <Tab.Screen name="Connect">
+      {() => <ConnectStack signedIn={signedIn} onSignedIn={onSignedIn} />}
+    </Tab.Screen>
     <Tab.Screen name="Discover" component={DiscoverScreen} />
     <Tab.Screen name="Help" component={HelpScreen} />
   </Tab.Navigator>
 );
 
 const App = () => {
+  const [signedIn, setSignedIn] = useState(false);
+
+  const handleSignedIn = (signedInStatus) => {
+    setSignedIn(signedInStatus);
+  };
+
   return (
     <NavigationContainer>
-      <MainTabNavigator />
+      <MainTabNavigator signedIn={signedIn} onSignedIn={handleSignedIn} />
     </NavigationContainer>
   );
 };

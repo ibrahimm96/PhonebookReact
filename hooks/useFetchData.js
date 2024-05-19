@@ -19,7 +19,7 @@ export default useFetchData = () => {
         'x-api-key': apiKey
       },
       body: JSON.stringify({
-        // Adjust site name to change user!
+        // Adjust site name to change user, setup for my site
         'site-name': 'savine63',
         'start-date': `2020-01-13 01:07:20.294135`
       })

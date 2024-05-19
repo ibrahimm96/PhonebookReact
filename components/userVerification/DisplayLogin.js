@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from "react-native";
-import { useEffect } from "react";
 import useCheckUser from "../../hooks/useCheckUser";
 
-const DisplayLogin = ({ onUserExists}) => {
+const DisplayLogin = ({ onUserExists }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [enteredNumber, setEnteredNumber] = useState('');  
   const { userExists, loading } = useCheckUser(phoneNumber);
 
-  const handlePhoneNumberChange = (input) => {
-    setEnteredNumber(input)
-    console.log('User Entered: ', enteredNumber);
-  }
-
   useEffect(() => {
-    if (userExists) {
-      onUserExists(true); 
+    if (phoneNumber) {
+      onUserExists(userExists);
     }
-  }, [userExists, onUserExists]);
+  }, [userExists, phoneNumber, onUserExists]);
 
+  const handlePhoneNumberChange = (input) => {
+    setEnteredNumber(input);
+  };
+
+  const handlePhoneNumberSubmit = () => {
+    setPhoneNumber(enteredNumber);
+  };
 
   return (
     <View style={styles.container}>
@@ -36,7 +37,7 @@ const DisplayLogin = ({ onUserExists}) => {
       </View>
       <Button
         title="Load my Site"
-        onPress={()=>setPhoneNumber(enteredNumber)}
+        onPress={handlePhoneNumberSubmit}
       />
     </View>
   );
@@ -66,6 +67,5 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
-
 
 export default DisplayLogin;

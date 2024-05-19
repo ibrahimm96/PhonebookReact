@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from "react-native";
+import useSendOTP from "../../hooks/useSendOTP";
 
-const DisplayVerification = () => {
+const DisplayVerification = ({ onSignedIn }) => {
   const [verificationCode, setVerificationCode] = useState('');
   const inputRefs = useRef([]);
   const digitCount = 6;
+
+  const { response, loading, error } = useSendOTP();
 
   const focusNextInput = (index) => {
     if (index < digitCount - 1) {
@@ -21,6 +24,19 @@ const DisplayVerification = () => {
     setVerificationCode(newVerificationCode.join(''));
   };
 
+  const verifyCode = (code) => {
+    if (code === '000000') {
+      onSignedIn(true);
+    } else {
+      onSignedIn(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <ActivityIndicator size="large" color="#0000ff" />
+    )
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Enter Verification Code:</Text>
