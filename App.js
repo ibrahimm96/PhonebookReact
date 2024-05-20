@@ -32,7 +32,7 @@ const ConnectStack = ({ signedIn, onSignedIn }) => (
 const MainTabNavigator = ({ signedIn, onSignedIn }) => (
   <Tab.Navigator>
     <Tab.Screen name="Connect">
-      {() => <ConnectStack signedIn={signedIn} onSignedIn={onSignedIn} />}
+      {() => <ConnectStack/>}
     </Tab.Screen>
     <Tab.Screen name="Discover" component={DiscoverScreen} />
     <Tab.Screen name="Help" component={HelpScreen} />

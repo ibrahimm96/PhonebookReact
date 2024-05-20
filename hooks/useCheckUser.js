@@ -56,4 +56,3 @@ const useCheckUser = (rawPhoneNumber) => {
 };
 
 export default useCheckUser;
-

@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
 import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from "react-native";
+import DisplayUserPhonebook from "../DisplayUserPhonebook";
 import useSendOTP from "../../hooks/useSendOTP";
 
-const DisplayVerification = ({ onSignedIn }) => {
+const DisplayVerification = () => {
   const [verificationCode, setVerificationCode] = useState('');
+  const [signedIn, setSignedIn] = useState(false)
   const inputRefs = useRef([]);
   const digitCount = 6;
 
@@ -26,9 +28,9 @@ const DisplayVerification = ({ onSignedIn }) => {
 
   const verifyCode = (code) => {
     if (code === '000000') {
-      onSignedIn(true);
+      setSignedIn(true)
     } else {
-      onSignedIn(false);
+      setSignedIn(false)
     }
   };
 
@@ -37,26 +39,31 @@ const DisplayVerification = ({ onSignedIn }) => {
       <ActivityIndicator size="large" color="#0000ff" />
     )
   }
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Enter Verification Code:</Text>
-      <View style={styles.inputContainer}>
-        {[...Array(digitCount).keys()].map((index) => (
-          <TextInput
-            key={index}
-            ref={(ref) => (inputRefs.current[index] = ref)}
-            style={styles.input}
-            keyboardType="numeric"
-            maxLength={1}
-            onChangeText={(text) => handleInputChange(text, index)}
-          />
-        ))}
+  if (!signedIn) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Enter Verification Code:</Text>
+        <View style={styles.inputContainer}>
+          {[...Array(digitCount).keys()].map((index) => (
+            <TextInput
+              key={index}
+              ref={(ref) => (inputRefs.current[index] = ref)}
+              style={styles.input}
+              keyboardType="numeric"
+              maxLength={1}
+              onChangeText={(text) => handleInputChange(text, index)}
+            />
+          ))}
+        </View>
+        <Button title="Verify" onPress={() => verifyCode(verificationCode)} />
       </View>
-      <Button title="Verify" onPress={() => verifyCode(verificationCode)} />
-    </View>
-  );
-};
+    );
+  };
 
+  return (
+    <DisplayUserPhonebook />
+  )
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
