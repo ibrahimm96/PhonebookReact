@@ -1,7 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../UserContext";
 
 export default useFetchData = () => {
+  const { username } = useContext(UserContext);
   const [textContent, setTextContent] = useState([]);
   const [imageContent, setImageContent] = useState([]);
   const [userPreferences, setUserPreferences] = useState([]);
@@ -20,7 +22,7 @@ export default useFetchData = () => {
       },
       body: JSON.stringify({
         // Adjust site name to change user, setup for my site
-        'site-name': 'savine63',
+        'site-name': username,
         'start-date': `2020-01-13 01:07:20.294135`
       })
     })

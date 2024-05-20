@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from "react-native";
+import { useContext } from "react";
 import useCheckUser from "../../hooks/useCheckUser";
+import { UserContext } from "../../UserContext";
 
-const DisplayLogin = ({ onUserExists }) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+const DisplayLogin = () => {
+  const { phoneNumber, setPhoneNumber, userExistenceStatus, setUserExistenceStatus } = useContext(UserContext);
   const [enteredNumber, setEnteredNumber] = useState('');  
   const { userExists, loading } = useCheckUser(phoneNumber);
 
   useEffect(() => {
-    if (phoneNumber) {
-      onUserExists(userExists);
+    if (phoneNumber && userExists !== undefined) {
+      setUserExistenceStatus(userExists);
+      if (userExists) {
+        setPhoneNumber(phoneNumber);
+      }
     }
-  }, [userExists, phoneNumber, onUserExists]);
+  }, [userExists, phoneNumber, setUserExistenceStatus, setPhoneNumber]);
 
   const handlePhoneNumberChange = (input) => {
-    setEnteredNumber(input);
+    const numericInput = input.replace(/[^0-9]/g, '');
+    setEnteredNumber(numericInput);
   };
 
   const handlePhoneNumberSubmit = () => {

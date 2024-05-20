@@ -10,46 +10,46 @@ import HelpScreen from './screens/tabs/HelpScreen';
 import useSendOTP from './hooks/useSendOTP';
 import { useState } from 'react';
 import DisplayLogin from './components/userVerification/DisplayLogin';
+import { UserContext } from './UserContext';
+import { UserProvider } from './UserContext';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const ConnectStack = ({ signedIn, onSignedIn }) => (
-  <Stack.Navigator>
-    {signedIn ? (
-      <>
-        <Stack.Screen name="ConnectMain" component={ConnectScreen} />
-        <Stack.Screen name="DisplayUserPhonebook" component={DisplayUserPhonebook} />
-      </>
-    ) : (
-      <Stack.Screen name="Login" options={{ headerShown: false }}>
-        {({ navigation }) => <LoginScreen onSignedIn={onSignedIn} />}
-      </Stack.Screen>
-    )}
-  </Stack.Navigator>
-);
+const ConnectStack = () => {
+  const { signedIn, setSignedIn } = React.useContext(UserContext);
 
-const MainTabNavigator = ({ signedIn, onSignedIn }) => (
+  return (
+    <Stack.Navigator>
+      {signedIn ? (
+        <>
+          <Stack.Screen name="ConnectMain" component={ConnectScreen} />
+          <Stack.Screen name="DisplayUserPhonebook" component={DisplayUserPhonebook} />
+        </>
+      ) : (
+        <Stack.Screen name="Login" options={{ headerShown: false }}>
+          {({ navigation }) => <LoginScreen onSignedIn={setSignedIn} />}
+        </Stack.Screen>
+      )}
+    </Stack.Navigator>
+  );
+};
+
+const MainTabNavigator = () => (
   <Tab.Navigator>
-    <Tab.Screen name="Connect">
-      {() => <ConnectStack/>}
-    </Tab.Screen>
+    <Tab.Screen name="Connect" component={ConnectStack} />
     <Tab.Screen name="Discover" component={DiscoverScreen} />
     <Tab.Screen name="Help" component={HelpScreen} />
   </Tab.Navigator>
 );
 
 const App = () => {
-  const [signedIn, setSignedIn] = useState(false);
-
-  const handleSignedIn = (signedInStatus) => {
-    setSignedIn(signedInStatus);
-  };
-
   return (
-    <NavigationContainer>
-      <MainTabNavigator signedIn={signedIn} onSignedIn={handleSignedIn} />
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <MainTabNavigator />
+      </NavigationContainer>
+    </UserProvider>
   );
 };
 

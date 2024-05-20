@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView, TextInput, Button, Alert, RefreshControl} from "react-native";
 import { useState, useCallback } from "react";
 import useFetchData from "../hooks/useFetchData";
 
 const DisplayUserPhonebook = () => {
+
   const { textContent, imageContent, isLoading } = useFetchData();
 
   const sortedTextContent = textContent.length > 0 ? textContent.sort((a, b) => a.timestamp - b.timestamp) : [];

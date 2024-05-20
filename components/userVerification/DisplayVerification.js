@@ -1,15 +1,18 @@
 import React, { useState, useRef } from "react";
 import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from "react-native";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext";
 import DisplayUserPhonebook from "../DisplayUserPhonebook";
 import useSendOTP from "../../hooks/useSendOTP";
 
 const DisplayVerification = () => {
   const [verificationCode, setVerificationCode] = useState('');
+  const { phoneNumber } = useContext(UserContext);
   const [signedIn, setSignedIn] = useState(false)
   const inputRefs = useRef([]);
   const digitCount = 6;
 
-  const { response, loading, error } = useSendOTP();
+  const { response, loading, error } = useSendOTP(phoneNumber)
 
   const focusNextInput = (index) => {
     if (index < digitCount - 1) {

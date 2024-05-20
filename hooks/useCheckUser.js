@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import { UserContext } from "../UserContext";
 
 const useCheckUser = (rawPhoneNumber) => {
   const [userExists, setUserExists] = useState(false)
   const [loading, setLoading] = useState(false)
+  const { setUsername } = useContext(UserContext);
+
   const phonebookNumber = '+15103301270';
   
   const apiURL = "https://api.phonebook.lol/get-site-from-number";
@@ -34,9 +37,11 @@ const useCheckUser = (rawPhoneNumber) => {
           if (data.number !== "Null") {
             console.log('User Exists: ', data);
             setUserExists(true);
+            setUsername(data.number);
           } else {
             console.log('User does not exist: ', data);
             setUserExists(false);
+            setUsername(null); 
           }
         } else {
           throw new Error('Unexpected response format');

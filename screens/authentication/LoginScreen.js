@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import DisplayLogin from "../../components/userVerification/DisplayLogin";
 import DisplayVerification from "../../components/userVerification/DisplayVerification";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext";
 
 const LoginScreen = ({ onSignedIn }) => {
-  const [userExists, setUserExists] = useState(false);
-
-  const handleUserExists = (exists) => {
-    setUserExists(exists);
-  };
+  const { userExistenceStatus } = useContext(UserContext);
 
   return (
     <>
-      {!userExists ? (
-        <DisplayLogin onUserExists={handleUserExists} />
+      {!userExistenceStatus ? (
+        <DisplayLogin />
       ) : (
         <DisplayVerification onSignedIn={onSignedIn} />
       )}

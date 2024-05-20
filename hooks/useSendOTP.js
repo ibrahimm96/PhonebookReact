@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 
-export default useSendOTP = () => {
+export default useSendOTP = (phoneNumber) => {
   const phonebookNumber = '+15103301270';
-  const myNumber = '+19172883884';
 
   const apiURL = "https://api.phonebook.lol/send-message";
   const apiKey = "CCc6OH6HZ84LTHLUhdWI55pOBR681neJ4UktgqtZ";
@@ -24,7 +23,7 @@ export default useSendOTP = () => {
           'x-api-key': apiKey,
         },
         body: JSON.stringify({
-          'to_number': myNumber,
+          'to_number': phoneNumber,
           'from_number': phonebookNumber,
           'message_contents': '000000 Test Message!'
         })
