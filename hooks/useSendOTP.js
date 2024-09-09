@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 
 export default useSendOTP = (phoneNumber) => {
-  const phonebookNumber = '+15103301270';
+  const phonebookNumber = '';
 
   const apiURL = "https://api.phonebook.lol/send-message";
-  const apiKey = "CCc6OH6HZ84LTHLUhdWI55pOBR681neJ4UktgqtZ";
+  const apiKey = "";
 
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);

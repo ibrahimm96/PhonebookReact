@@ -10,7 +10,7 @@ export default useFetchData = () => {
   const [isLoading, setLoading] = useState(true);
   
   const apiURL = "https://api.phonebook.lol/read-content-file";
-  const apiKey = "CCc6OH6HZ84LTHLUhdWI55pOBR681neJ4UktgqtZ";
+  const apiKey = "";
 
   // Initial API Fetch returns object containing post_content and user_preferences
   useEffect(() => {

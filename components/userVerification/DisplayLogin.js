@@ -8,8 +8,9 @@ const DisplayLogin = () => {
   const { phoneNumber, setPhoneNumber, userExistenceStatus, setUserExistenceStatus } = useContext(UserContext);
   const [enteredNumber, setEnteredNumber] = useState('');  
   const { userExists, loading } = useCheckUser(phoneNumber);
+  const [showRegistration, setShowRegistration] = useState(false)
 
-  useEffect(() => {
+  useEffect(() => { 
     if (phoneNumber && userExists !== undefined) {
       setUserExistenceStatus(userExists);
       if (userExists) {
@@ -27,6 +28,10 @@ const DisplayLogin = () => {
     setPhoneNumber(enteredNumber);
   };
 
+  const handleRegistration = () => {
+    navigation.navigate('DisplayRegister');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.phoneNumberContainer}>
@@ -39,12 +44,18 @@ const DisplayLogin = () => {
           onChangeText={handlePhoneNumberChange}
           maxLength={10} 
         />
-        {loading && <ActivityIndicator size="small" color="#0000ff" />}
+        {loading && <ActivityIndicator size="small" color="#0000ff" alignItems='center'/>}
       </View>
-      <Button
-        title="Load my Site"
-        onPress={handlePhoneNumberSubmit}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Register"
+          onPress={handleRegistration}
+        />
+        <Button
+          title="Load my Site"
+          onPress={handlePhoneNumberSubmit}
+        />
+      </View>
     </View>
   );
 };
@@ -71,6 +82,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 8,
     width: '80%',
+  },
+  buttonContainer: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    width: '80%', 
   },
 });
 

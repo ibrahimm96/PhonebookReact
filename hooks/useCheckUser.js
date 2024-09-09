@@ -7,10 +7,10 @@ const useCheckUser = (rawPhoneNumber) => {
   const [loading, setLoading] = useState(false)
   const { setUsername } = useContext(UserContext);
 
-  const phonebookNumber = '+15103301270';
+  const phonebookNumber = '';
   
   const apiURL = "https://api.phonebook.lol/get-site-from-number";
-  const apiKey = "CCc6OH6HZ84LTHLUhdWI55pOBR681neJ4UktgqtZ";
+  const apiKey = "";
 
   useEffect(() => {
     if (!rawPhoneNumber || rawPhoneNumber.length < 10) return; // Checks format of Number, returns if not a correct number

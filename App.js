@@ -12,6 +12,7 @@ import { useState } from 'react';
 import DisplayLogin from './components/userVerification/DisplayLogin';
 import { UserContext } from './UserContext';
 import { UserProvider } from './UserContext';
+import DisplayRegister from './components/userVerification/DisplayRegister';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -27,9 +28,12 @@ const ConnectStack = () => {
           <Stack.Screen name="DisplayUserPhonebook" component={DisplayUserPhonebook} />
         </>
       ) : (
-        <Stack.Screen name="Login" options={{ headerShown: false }}>
-          {({ navigation }) => <LoginScreen onSignedIn={setSignedIn} />}
-        </Stack.Screen>
+        <>
+          <Stack.Screen name="Login" options={{ headerShown: false }}>
+            {({ navigation }) => <LoginScreen onSignedIn={setSignedIn} />}
+          </Stack.Screen>
+          <Stack.Screen name="Register" component={DisplayRegister} />
+        </>
       )}
     </Stack.Navigator>
   );

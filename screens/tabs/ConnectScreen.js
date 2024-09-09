@@ -4,12 +4,7 @@ import { useState, useCallback } from "react";
 import LoginScreen from "../authentication/LoginScreen"
 
 const ConnectScreen = () => {
-
   
-  const handleUsernameSubmit = () => {
-    console.log("Username submitted from ConnectScreen");
-  };
-
   return (
     <View style={styles.container}>
       <LoginScreen />
